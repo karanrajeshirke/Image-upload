@@ -1,14 +1,23 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 function App() {
-  const [count, setCount] = useState(0);
+  const getAllData = async (req, res) => {
+    try {
+      const response = await axios.get("http://localhost:8080/getdata");
 
-  return (
-    <>
-    
-    <input type="file" accept="/*" />
-    </>
-  );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  
+
+  useEffect(() => {
+    getAllData();
+  }, []);
+
+  return <></>;
 }
 
 export default App;

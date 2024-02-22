@@ -2,8 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import formidable from "express-formidable";
 import fs from "fs";
+import cors from "cors"
 const app = express();
 
+
+app.use(cors())
+app.use(express.json())
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
