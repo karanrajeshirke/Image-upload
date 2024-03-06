@@ -67,6 +67,30 @@ app.get('/getdata',async(req,res)=>
   }
 })
 
+app.put("/update",async(req,res)=>
+{
+  try {
+   
+    let name="SAMOSAISMYFAVOURITE",age=123;
+    let id="65d71960814d1af5d1880a35"
+    const data=await userModel.findByIdAndUpdate(id,{name,age},{new:true})
+    res.send({data})
+  } catch (error) {
+    console.log(error);
+  }
+})
+app.get('/getuser/:id',async(req,res)=>
+{
+  try {
+    let {id}=req.params;
+    const user=await userModel.findById(id).select("photo");
+    console.log(user);
+    res.send({user});
+  } catch (error) {
+    console.log(error);
+  }
+})
+
 app.get("/photo/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -80,6 +104,12 @@ app.get("/photo/:id", async (req, res) => {
   }
 });
 
+
+app.post('/temproute',formidable(),(req,res)=>
+{
+  console.log(req.files);
+  console.log(req.fields);
+})
 
 
 const connectDb = async () => {
